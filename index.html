@@ -79,7 +79,9 @@
             display: block;
             cursor: pointer;
         }
-
+        .logo{
+          font-size: 2vh;
+        }
         .nav-links {
           width: 100%;
           height: 100vh; /* Ocupa toda la altura de la pantalla */
@@ -98,7 +100,7 @@
         }
 
         .nav-links a {
-          font-size: 24px; /* Tamaño de fuente más grande */
+          font-size: 4vh; /* Tamaño de fuente más grande */
           padding: 10px 20px; /* Espaciado alrededor de enlaces para un fácil toque */
           border-radius: 5px; /* Bordes redondeados en los enlaces */
         }
@@ -133,8 +135,8 @@
 
 
       .burger div{
-          width: 25px;
-          height: 3px;
+          width: 40px;
+          height: 6px;
           background-color: #F2F2F2;
           margin: 5px;
           transition: all 0.3s;
@@ -243,8 +245,61 @@
           z-index: 900;
           position: absolute;
           display: inline-block;
-          top: 475px;
-          right: 150px;
+          top: auto;
+          bottom: 25px; /* Espacio desde la parte inferior de la pantalla */
+          right: 150px; /* Espacio desde la derecha de la pantalla */
+          margin-bottom: 15px;
+          
+        }
+        .slider-container p{
+          font-size: 1.8vh;
+          padding: 10px;
+        }
+        .radio-buttons-container {
+          top: auto; /* Removiendo el valor anterior */
+          bottom: 320px; /* Espacio desde la parte inferior de la pantalla. Asegúrate de que esta distancia es suficiente para no superponerse con el slider-container */
+          right: 30px; /* Espacio desde la derecha de la pantalla */
+          padding: 20px;
+        }
+
+        .radio-buttons-container label{
+          font-size: 2vh;
+          margin: 5px;
+        }
+
+        input[type=range] {
+          -webkit-appearance: none; /* Hace que la barra de desplazamiento sea más personalizable */
+          width: 100%;
+          height: 20px; /* Modifica este valor para aumentar o disminuir la altura */
+          border-radius: 10px;
+          background: #d3d3d3;
+          outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 30px; /* Modifica este valor para aumentar o disminuir el ancho del pulgar */
+          height: 30px; /* Modifica este valor para aumentar o disminuir la altura del pulgar */
+          background: #3a4efd; /* Cambia esto a tu color preferido */
+          cursor: pointer;
+          border-radius: 15px; /* Hace que el pulgar sea redondo. Cambia según tus preferencias */
+        }
+
+        input[type=range]::-moz-range-thumb {
+          width: 30px; /* Igual que arriba */
+          height: 30px; /* Igual que arriba */
+          background: #4CAF50; /* Igual que arriba */
+          cursor: pointer;
+          border-radius: 15px; /* Igual que arriba */
+        }
+        input[type=range] {
+            height: 25px;
+            width: 200px;
+        }
+        input[type=range]::-webkit-slider-thumb,
+        input[type=range]::-moz-range-thumb {
+            width: 35px;
+            height: 35px;
         }
       }
 
