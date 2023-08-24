@@ -239,6 +239,11 @@
         cursor: pointer;
       }
 
+      /* Quitamos el control del zoom por click en la pantalla */
+      .leaflet-control-container{
+        display: none;
+      }
+
       /* Estilos para dispositivos móviles */
       @media (max-width: 1200px) {
         .slider-container {
@@ -247,13 +252,16 @@
           display: inline-block;
           top: auto;
           bottom: 25px; /* Espacio desde la parte inferior de la pantalla */
-          right: 150px; /* Espacio desde la derecha de la pantalla */
+          right: 0px; /* Espacio desde la derecha de la pantalla */
           margin-bottom: 15px;
           
         }
         .slider-container p{
           font-size: 1.8vh;
           padding: 10px;
+          position: absolute;
+          bottom: 500px;
+          font-weight: bold;
         }
         .radio-buttons-container {
           top: auto; /* Removiendo el valor anterior */
@@ -294,7 +302,9 @@
         }
         input[type=range] {
             height: 25px;
-            width: 200px;
+            width: 315px;
+            position: relative;
+            right: 75px;
         }
         input[type=range]::-webkit-slider-thumb,
         input[type=range]::-moz-range-thumb {
@@ -302,6 +312,7 @@
             height: 35px;
         }
       }
+
 
         </style>
   </head>
