@@ -6,6 +6,7 @@ var datosBarrios = [{"id": "13", "type": "Feature", "properties": {"name": "la M
 let defaultLat = 41.3870205;
 let defaultLng = 2.306007;
 let defaultZoom = 11;
+let minZoom = 12;
 
 // Si el ancho de la ventana es menor que 768px (típicamente un móvil)
 if (window.innerWidth < 1200) {
@@ -13,6 +14,7 @@ if (window.innerWidth < 1200) {
     defaultLat = 41.370205;
     defaultLng = 2.15007;
     defaultZoom = 13;
+    minZoom= 13
     
 }
 
@@ -23,7 +25,7 @@ var mymap = L.map('mapid').setView([defaultLat, defaultLng], defaultZoom);
 // Agregar una capa de mapa base
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
   maxZoom: 19,
-  minZoom: 12,
+  minZoom: minZoom,
 }).addTo(mymap);
 
 // Función para obtener el color correspondiente a un valor
