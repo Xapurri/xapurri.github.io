@@ -26,14 +26,15 @@
           justify-content: space-around;
           align-items: center;
           min-height: 8vh;
-          background-color: #D4DADC;
+          background-color: #001f3f; /* Azul marino oscuro */
           top: 0;
           position: sticky;
           z-index: 999;
+          transition: all 0.3s;
 
       }
       .logo{
-          color: #062715;
+          color: #ffffff;
           text-transform: uppercase;
           letter-spacing: 5px;
           font-size: 25px;
@@ -48,27 +49,118 @@
 
       .nav-links li{
           list-style: none;
+          opacity: 0;
+          transform: translateY(1rem);
+          animation: fadeIn ease 0.5s forwards;
+      }
+
+      @keyframes fadeIn {
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
       }
 
       .nav-links a{
-          color: #062715;
+          color: #ffffff;
           text-decoration: none;
           letter-spacing: 4px;
           font-weight: bold;
           font-size: 16px;
+          transition: all 0.3s;
+      }
+      /* Por defecto, ocultamos el menú hamburguesa */
+      .burger {
+          display: none;
+      }
+      /* Cuando la pantalla es de 768px o menos, mostramos el menú hamburguesa y ocultamos el menú principal */
+      @media (max-width: 1200px) {
+        .burger{
+            display: block;
+            cursor: pointer;
+        }
+
+        .nav-links {
+          width: 100%;
+          height: 100vh; /* Ocupa toda la altura de la pantalla */
+          position: fixed; /* Cambio a fixed para que cubra todo el viewport */
+          top: 0;
+          left: 0;
+          background-color: rgba(0, 31, 63, 0.95); /* Fondo con opacidad */
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          transform: translateY(-100%); /* Oculta el menú por defecto */
+          transition: transform 0.5s ease; /* Animación suave de desplazamiento */
+        }
+        .nav-links li {
+          margin: 20px 0; /* Espaciado ampliado entre enlaces */
+        }
+
+        .nav-links a {
+          font-size: 24px; /* Tamaño de fuente más grande */
+          padding: 10px 20px; /* Espaciado alrededor de enlaces para un fácil toque */
+          border-radius: 5px; /* Bordes redondeados en los enlaces */
+        }
+        .nav-links a:hover {
+          background-color: rgba(255, 255, 255, 0.1); /* Efecto hover sutil */
+        }
+
+        /* Icono de cerrar para el menú desplegado */
+        .close-nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #ffffff;
+        }
+        /* Estilos para el ícono de menú hamburguesa */
+        .burger div {
+            width: 30px; /* Ligeramente más grande para facilitar el toque */
+        }
+
+        .close-nav:hover {
+            color: #01FF70;
+        }
+        .nav-active {
+          display: flex;
+        }
+        .leaflet-top, .leaflet-bottom {
+        z-index: 900;
+        }
       }
 
-      .burger{
-          display: none;
-          cursor: pointer;
-      }
 
       .burger div{
           width: 25px;
           height: 3px;
           background-color: #F2F2F2;
           margin: 5px;
+          transition: all 0.3s;
 
+      }
+
+      /* Añadiendo pequeños estilos para el efecto toggle en el menú hamburguesa */
+      .toggle .line1 {
+          transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .toggle .line2 {
+          opacity: 0;
+      }
+
+      .toggle .line3 {
+          transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      .nav-links a:hover {
+        color: #01FF70; /* Un verde brillante para el hover */
+        text-decoration: underline;
+      }
+
+      .nav-active {
+        transform: translateX(0);
       }
 
       #mapid {
@@ -87,7 +179,7 @@
         display: inline-block;
         top: 150px;
         right: 150px;
-        z-index: 999;
+        z-index: 900;
         font-size: 1.2rem;
         background-color: #fcfeff3f;
         border-radius: 25px;
@@ -100,7 +192,7 @@
         margin: 15px;
       }
       .slider-container{
-        z-index: 999;
+        z-index: 900;
         position: absolute;
         display: inline-block;
         top: 400px;
@@ -123,7 +215,7 @@
         height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
         background-color: #fcfeff3f; /* Hace que el fondo de los detalles del barrio sea blanco. Cambia esto según tu diseño */
         padding: 20px; /* Añade algo de relleno alrededor del contenido */
-        z-index: 999;
+        z-index: 900;
         border-radius: 25px;
         font-size: 1.1rem;
         color: #636e74e3;
@@ -144,14 +236,16 @@
         text-decoration: none;
         cursor: pointer;
       }
+
       /* Estilos para dispositivos móviles */
       @media (max-width: 1200px) {
-      .slider-container {
-        z-index: 999;
-        position: absolute;
-        display: inline-block;
-        top: 460px;
-        right: 150px;
+        .slider-container {
+          z-index: 900;
+          position: absolute;
+          display: inline-block;
+          top: 475px;
+          right: 150px;
+        }
       }
 
         </style>
@@ -217,6 +311,30 @@
       
 
       }
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const burger = document.querySelector(".burger");
+          const nav = document.querySelector(".nav-links");
+          const navLinks = document.querySelectorAll(".nav-links li");
+
+          burger.addEventListener("click", () => {
+              // Toggle Nav
+              nav.classList.toggle("nav-active");
+
+              // Animation Links
+              navLinks.forEach((link, index) => {
+                  if (link.style.animation) {
+                      link.style.animation = "";
+                  } else {
+                      link.style.animation = `fadeIn 0.5s ease forwards ${index / 7 + 0.3}s`;
+                  }
+              });
+
+              // Burger Animation
+              burger.classList.toggle("toggle");
+          });
+      });
       </script>
 
   </body>
