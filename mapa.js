@@ -48,24 +48,26 @@ mymap.on('zoomend', function() {
     infoContainerDetallesBarrio.classList.add("modoOscuro");
     
   } else {
-    // Revertir el estilo del contenedor a su apariencia original
-    infoContainerInfoInicial.style.backgroundColor = "#fcfeff3f";
-    infoContainerInfoInicial.style.color = "#636e74e3";
-    cerrarIconInfo.style.color = "#636e74e3";  // Color original del ícono de cerrar
+    if (window.innerWidth > 1200) {
+      // Revertir el estilo del contenedor a su apariencia original
+      infoContainerInfoInicial.style.backgroundColor = "#fcfeff3f";
+      infoContainerInfoInicial.style.color = "#636e74e3";
+      cerrarIconInfo.style.color = "#636e74e3";  // Color original del ícono de cerrar
 
-    // Restaurar el color original de los enlaces
-    for (var i = 0; i < enlacesInfoInicial.length; i++) {
-      enlacesInfoInicial[i].style.color = ""; // Esto establecerá el color al valor predeterminado del CSS
-    } 
+      // Restaurar el color original de los enlaces
+      for (var i = 0; i < enlacesInfoInicial.length; i++) {
+        enlacesInfoInicial[i].style.color = ""; // Esto establecerá el color al valor predeterminado del CSS
+      } 
 
     // Revertir el estilo del contenedor detallesBarrio a su apariencia original
-    infoContainerDetallesBarrio.style.backgroundColor = "#fcfeff3f";
-    infoContainerDetallesBarrio.style.color = "#636e74e3";
-    cerrarIconDetalles.style.color = "#636e74e3";  // Color original del ícono de cerrar
-
-    infoContainerInfoInicial.classList.remove("modoOscuro");
-    infoContainerDetallesBarrio.classList.remove("modoOscuro");
     
+      infoContainerDetallesBarrio.style.backgroundColor = "#fcfeff3f";
+      infoContainerDetallesBarrio.style.color = "#636e74e3";
+      cerrarIconDetalles.style.color = "#636e74e3";  // Color original del ícono de cerrar
+
+      infoContainerInfoInicial.classList.remove("modoOscuro");
+      infoContainerDetallesBarrio.classList.remove("modoOscuro");
+    }
   }
 });
 

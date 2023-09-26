@@ -286,6 +286,10 @@
           margin-bottom: 15px;
           
         }
+
+        .detallesSubidasBajadasPrecio {
+          display: none !important;
+        }
         .slider-container p{
           font-size: 1.8vh;
           padding: 10px;
@@ -306,7 +310,7 @@
         }
 
         .radio-buttons-container label{
-          font-size: 1.3vh;
+          font-size: 1.5vh;
           margin: 5px;
           display: flex;
           flex-wrap: nowrap;
@@ -343,15 +347,30 @@
             height: 25px;
             width: 315px;
             position: relative;
-            right: 47px;
+            right: 15%;
         }
         input[type=range]::-webkit-slider-thumb,
         input[type=range]::-moz-range-thumb {
             width: 35px;
             height: 35px;
         }
-        .detallesBarrio{
+        .detallesBarrio {
           display: none;
+          position: absolute;
+          top: 35%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
+          right: 15%; /* Ajusta esto para cambiar cuánto espacio hay desde la derecha del contenedor */
+          width: auto; /* Ajusta esto para cambiar el ancho de los detalles del barrio */
+          height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
+          background-color: rgb(51, 51, 51);
+          opacity: 0.9;
+          padding: 20px; /* Añade algo de relleno alrededor del contenido */
+          z-index: 900;
+          border-radius: 25px;
+          font-size: 1.1rem;
+          color: rgb(255, 255, 255);
+        }
+        a {
+          color: #FFF !important;
         }
         .infoInicial {
         position: fixed; /* Posición fija para que cubra todo el viewport */
