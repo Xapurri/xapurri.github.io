@@ -13,8 +13,8 @@ if (window.innerWidth < 1200) {
     // Establece las coordenadas que desees para dispositivos móviles
     defaultLat = 41.370205;
     defaultLng = 2.15007;
-    defaultZoom = 13;
-    minZoom= 13
+    defaultZoom = 12;
+    minZoom= 11;
     
 }
 
@@ -86,7 +86,7 @@ function getColor(value, minValue, maxValue, property) {
   var ratio = (value - minValue) / (maxValue - minValue);
   return scale(ratio).hex();
 }
-
+var isMobile = window.innerWidth < 1200;
 function onEachFeature(feature, layer, fecha, property, minValue, maxValue) {
   if (feature.properties) {
     let value = parseFloat(feature.properties.data[fecha][property]);
@@ -97,7 +97,9 @@ function onEachFeature(feature, layer, fecha, property, minValue, maxValue) {
                          '<br /> Precio: ' + feature.properties.data[fecha].Precio + 
                          '<br /> P/m2: ' + feature.properties.data[fecha]['p/m2'] +
                          '<br /> Cantidad: ' + feature.properties.data[fecha]['Cantidad'];
-    layer.bindTooltip(tooltipContent);
+    if (!isMobile) {  // No asociar el tooltip si es móvil
+      layer.bindTooltip(tooltipContent);
+    }
     layer.setStyle({
       fillColor: getColor(value, minValue, maxValue, property),
       fillOpacity: 0.5,
