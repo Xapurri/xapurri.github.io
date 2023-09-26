@@ -1,0 +1,44 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    color: #ffff;
+}
+
+.chart-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#title, #histPrecio, #histM2, #barrioPrecio, #barrioDist, #pisosFecha{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #444;
+}
+
+.titulo-graficos {
+    color: black;
+    margin: 20px 0px;
+    font-family: Helvetica, Arial, sans-serif;
+    opacity: 1;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .chart-container {
+        flex-direction: column;
+    }
+    
+    #histPrecio, #histM2 {
+        width: 100%;
+    }
+}

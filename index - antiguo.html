@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa de los Barrios de Barcelona</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"></script>
+
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        box-sizing: border-box;
+      }
+
+      body {
+          background-color: #D4DADC;
+          
+      }
+
+
+      nav{
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          min-height: 8vh;
+          background-color: #D4DADC;
+          top: 0;
+          position: sticky;
+          z-index: 999;
+
+      }
+      .logo{
+          color: #062715;
+          text-transform: uppercase;
+          letter-spacing: 5px;
+          font-size: 25px;
+
+      }
+
+      .nav-links{
+          display: flex;
+          justify-content: space-around;
+          width: 30%;
+      }
+
+      .nav-links li{
+          list-style: none;
+      }
+
+      .nav-links a{
+          color: #062715;
+          text-decoration: none;
+          letter-spacing: 4px;
+          font-weight: bold;
+          font-size: 16px;
+      }
+
+      .burger{
+          display: none;
+          cursor: pointer;
+      }
+
+      .burger div{
+          width: 25px;
+          height: 3px;
+          background-color: #F2F2F2;
+          margin: 5px;
+
+      }
+
+      #mapid {
+        height: 100vh;
+        width: 100%;
+
+      }
+      .info {
+        padding: 6px 8px;
+        background: white;
+        border: solid 1px #bbb;
+        border-radius: 5px;
+      }
+      .radio-buttons-container {
+        position: absolute;
+        display: inline-block;
+        top: 150px;
+        right: 150px;
+        z-index: 999;
+        font-size: 1.2rem;
+        background-color: #fcfeff3f;
+        border-radius: 25px;
+        border: 2px;
+        border-color: #3c474dd8;
+      }
+
+      .radio-buttons-container label {
+        display: block;
+        margin: 15px;
+      }
+      .slider-container{
+        z-index: 999;
+        position: absolute;
+        display: inline-block;
+        top: 400px;
+        right: 150px;
+        
+      }
+      .range {
+        width: 175px;
+        margin-right: 5px;
+      }
+      .range:hover{
+        cursor: pointer;  
+      }
+      .detallesBarrio {
+        display: none;
+        position: absolute;
+        top: 50%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
+        right: 30%; /* Ajusta esto para cambiar cuánto espacio hay desde la derecha del contenedor */
+        width: auto; /* Ajusta esto para cambiar el ancho de los detalles del barrio */
+        height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
+        background-color: #fcfeff3f; /* Hace que el fondo de los detalles del barrio sea blanco. Cambia esto según tu diseño */
+        padding: 20px; /* Añade algo de relleno alrededor del contenido */
+        z-index: 999;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        color: #636e74e3;
+      }
+      .cerrar {
+        position: absolute;
+        top: -5px;
+        right: 12px;
+        color: #636e74e3;
+        font-size: 30px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .cerrar:hover,
+      .cerrar:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      /* Estilos para dispositivos móviles */
+      @media (max-width: 1200px) {
+        .slider-container {
+          z-index: 999;
+          position: absolute;
+          display: inline-block;
+          top: 460px;
+          right: 150px;
+        }
+      }
+
+        </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+          <h4>BCN-data</h4>
+      </div>
+      <ul class="nav-links">
+          <li><a href="index.html">Mapa</a></li>
+          <li><a href="graficos.html">Gráficos</a></li>
+          <li><a href="contact.html">Contacto</a></li>
+          <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+      </div>
+    </nav>   
+    <div id="mapid">
+      <form class="radio-buttons-container">
+        <label for=""><span><strong>Seleccionar Mapa</strong></span></label>
+        <label>
+            <input type="radio" name="propiedad" value="Precio" checked>
+            Precio de Venta
+            </label>
+        <label>
+            <input type="radio" name="propiedad" value="p/m2">
+            Precio por m²
+        </label>
+      </form>
+    </div>
+    <div class="slider-container">
+      <p id="fechaDisplay" style="text-align: center;"></p>
+      <input type="range" id="fechaRange" class="range">
+    </div>
+    <div id="detallesBarrio" class="detallesBarrio">
+      <span id="cerrar" class="cerrar">&times;</span>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script src="mapa.js"></script>
+
+    <script>
+      window.onload = function() {
+          var fechaDisplay = document.getElementById('fechaDisplay');
+      
+          fechaRange.addEventListener('input', function() {
+          // Convierte el valor del control de rango de vuelta a una fecha
+          var fecha = fechas[parseInt(this.value)];
+          // Actualiza el elemento de visualización de la fecha
+          fechaDisplay.textContent = fecha;
+          actualizarMapa(fecha, getPropiedadSeleccionada());
+          }); 
+          // Función para actualizar el contenido del elemento <p> con el valor de "fechas[fechaMax]"
+          function actualizarFechaDisplay() {
+              var fechaDisplay = document.getElementById('fechaDisplay');
+              fechaDisplay.textContent = fechas[fechaMax];
+          }
+          actualizarFechaDisplay();   
+      
+
+      }
+      </script>
+
+  </body>
+</html>

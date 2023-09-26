@@ -1,5 +1,13 @@
 19.08.2023 - 
 
-Se actualiza la interfaz de laagina principal
-Se añade la página de 'About Me'
+Se actualiza la interfaz de la página principal.
+
+Se añade la página de 'About Me'.
+
+31.08.2023 - 
+
+Se actualiza la página de Gráficos - Por el momento tan solo mostramos gráficos estadisticos de los pisos de alquiler en Gracia. La idea es 
+replicarlo para los pisos de compra de cada barrio, distrito y de Barcelona en general.
+
+
 

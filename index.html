@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa de los Barrios de Barcelona</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -197,7 +199,7 @@
         z-index: 900;
         position: absolute;
         display: inline-block;
-        top: 400px;
+        top: 450px;
         right: 150px;
         
       }
@@ -208,11 +210,33 @@
       .range:hover{
         cursor: pointer;  
       }
+      .infoInicial {
+        right: 360px !important;
+        left: 40%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Añade sombra para un aspecto elevado */
+      }
       .detallesBarrio {
         display: none;
         position: absolute;
-        top: 50%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
+        top: 52%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
         right: 30%; /* Ajusta esto para cambiar cuánto espacio hay desde la derecha del contenedor */
+        width: auto; /* Ajusta esto para cambiar el ancho de los detalles del barrio */
+        height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
+        background-color: #fcfeff3f; /* Hace que el fondo de los detalles del barrio sea blanco. Cambia esto según tu diseño */
+        padding: 20px; /* Añade algo de relleno alrededor del contenido */
+        z-index: 900;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        color: #636e74e3;
+      }
+      table tr td {
+        padding: 10px 0; /* 10px es solo un valor de ejemplo, puedes ajustarlo a lo que necesites */
+      }
+      .detallesSubidasBajadasPrecio {
+        display: none;
+        position: absolute;
+        top: 52%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
+        right: 150px; /* Ajusta esto para cambiar cuánto espacio hay desde la derecha del contenedor */
         width: auto; /* Ajusta esto para cambiar el ancho de los detalles del barrio */
         height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
         background-color: #fcfeff3f; /* Hace que el fondo de los detalles del barrio sea blanco. Cambia esto según tu diseño */
@@ -238,7 +262,13 @@
         text-decoration: none;
         cursor: pointer;
       }
+      .modoOscuro a {
+          color: #FFF !important; /* ¡Importante! para asegurarnos de que este estilo tiene prioridad */
+      }
 
+      .modoOscuro .cerrar {
+          color: #FFF !important; /* ¡Importante! para el ícono de cerrar */
+      }
       /* Quitamos el control del zoom por click en la pantalla */
       .leaflet-control-container{
         display: none;
@@ -260,7 +290,7 @@
           font-size: 1.8vh;
           padding: 10px;
           position: absolute;
-          bottom: 380px;
+          bottom: 470px;
           font-weight: bold;
         }
         .radio-buttons-container {
@@ -311,9 +341,39 @@
             width: 35px;
             height: 35px;
         }
+        .detallesBarrio{
+          display: none;
+        }
+        .infoInicial {
+        position: fixed; /* Posición fija para que cubra todo el viewport */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centra el contenedor en la pantalla */
+        width: 90%; /* Ocupa el 90% del ancho de la pantalla */
+        max-width: 400px; /* Ancho máximo para evitar que sea demasiado grande en pantallas pequeñas */
+        backdrop-filter: blur(10px); /* Fondo borroso */
+        border-radius: 15px; /* Bordes redondeados */
+    }
       }
-
-
+      .icon-help {
+        top: -35px;
+        left: 80%;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;  /* Hace que el ícono tenga forma circular */
+        background-color: #333;  /* Color de fondo del círculo */
+        color: #FFF;  /* Color del signo de interrogación */
+        font-weight: bold;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;  /* Cambia el cursor a una mano cuando pasas el mouse por encima */
+        position: relative;  /* Esto es necesario para que el signo de interrogación quede centrado */
+      }
+      .icon-help::before {
+        content: "?";  /* Inserta el signo de interrogación */
+      }
         </style>
   </head>
   <body>
@@ -335,6 +395,7 @@
     </nav>   
     <div id="mapid">
       <form class="radio-buttons-container">
+        <div class="icon-help"></div>
         <label for=""><span><strong>Seleccionar Mapa</strong></span></label>
         <label>
             <input type="radio" name="propiedad" value="Precio" checked>
@@ -344,6 +405,10 @@
             <input type="radio" name="propiedad" value="p/m2">
             Precio por m²
         </label>
+        <label>
+          <input type="radio" name="propiedad" value="Cantidad">
+          Cantidad
+      </label>
       </form>
     </div>
     <div class="slider-container">
@@ -353,10 +418,26 @@
     <div id="detallesBarrio" class="detallesBarrio">
       <span id="cerrar" class="cerrar">&times;</span>
     </div>
+    <div id="detallesSubidasBajadasPrecio" class="detallesSubidasBajadasPrecio">
+    </div>
+    <div id="infoInicial" class="detallesBarrio infoInicial">
+      <span id="cerrarInfo" class="cerrar">&times;</span>
+      <h2>BCN-DATA</h2>
+      <br>
+      <p>BCN-DATA es un estudio histórico de los precios de venta y de alquiler por Barrio de Barcelona.</p>
+      <br>
+      <p>Interactúa con el mapa seleccionando los datos a mostrar y un mes de la serie histórica.</p>
+      <br>
+      <p>Haz clic en cualquier barrio y accede a un detallado análisis de la evolución de su precio.</p>
+      <br>
+      <p>Proyecto realizado por <a href="/about.html">Xavi Puntí</a>.</p>
+      <br>
+      <p style="font-size: small;"><a href="/about.html">Documentación</a></p>
+    </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script src="mapa.js"></script>
-
+    <script src="datos_graficos.js"></script>
     <script>
       window.onload = function() {
           var fechaDisplay = document.getElementById('fechaDisplay');
@@ -375,8 +456,17 @@
           }
           actualizarFechaDisplay();   
       
+          document.getElementById("infoInicial").style.display = "block";
 
       }
+      document.querySelector(".icon-help").addEventListener("click", function() {
+          var infoContainer = document.getElementById("infoInicial");
+          
+          // Comprobamos si el contenedor está siendo mostrado o no
+          if (infoContainer.style.display === "none" || infoContainer.style.display === "") {
+              infoContainer.style.display = "block";  // Mostramos el contenedor
+          }
+      });
       </script>
       <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -400,7 +490,10 @@
               // Burger Animation
               burger.classList.toggle("toggle");
           });
-      });
+          document.getElementById("cerrarInfo").addEventListener("click", function() {
+            document.getElementById("infoInicial").style.display = "none";
+          });
+        });
       </script>
 
   </body>
