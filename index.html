@@ -295,16 +295,24 @@
           font-weight: bold;
         }
         .radio-buttons-container {
-          top: -10px; /* Removiendo el valor anterior */
-          bottom: 675px; /* Espacio desde la parte inferior de la pantalla. Asegúrate de que esta distancia es suficiente para no superponerse con el slider-container */
-          right: 210px; /* Espacio desde la derecha de la pantalla */
+          top: 0%; /* Removiendo el valor anterior */
+          right: 0%; /* Espacio desde la derecha de la pantalla */
           padding: 20px;
+          display: flex;
+        }
+
+        .radio-buttons-container input[type="radio"] + span {
+          margin-left: 10px;  /* Ajusta este valor según tus preferencias */
         }
 
         .radio-buttons-container label{
-          font-size: 2vh;
+          font-size: 1.3vh;
           margin: 5px;
-        }
+          display: flex;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          align-items: center;
+         }
 
         input[type=range] {
           -webkit-appearance: none; /* Hace que la barra de desplazamiento sea más personalizable */
