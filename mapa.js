@@ -12,7 +12,7 @@ let minZoom = 12;
 if (window.innerWidth < 1200) {
     // Establece las coordenadas que desees para dispositivos móviles
     defaultLat = 41.3850205;
-    defaultLng = 2.15007;
+    defaultLng = 2.16007;
     defaultZoom = 12;
     minZoom= 11;
     
