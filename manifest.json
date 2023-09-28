@@ -1,0 +1,22 @@
+{
+    "name": "Mapa de los Barrios de Barcelona",
+    "short_name": "Barcelona Map",
+    "description": "Una aplicación interactiva para analizar la evolución de los precios por barrio en Barcelona.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "images/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "images/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }

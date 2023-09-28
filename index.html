@@ -6,6 +6,7 @@
     <title>Mapa de los Barrios de Barcelona</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"></script>
 
@@ -522,6 +523,16 @@
             document.getElementById("infoInicial").style.display = "none";
           });
         });
+      </script>
+      <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registrado con éxito:', registration);
+            }).catch((error) => {
+              console.log('Error al registrar el Service Worker:', error);
+            });
+        }
       </script>
 
   </body>
