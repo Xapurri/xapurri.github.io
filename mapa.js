@@ -88,7 +88,18 @@ function getColor(value, minValue, maxValue, property) {
   var ratio = (value - minValue) / (maxValue - minValue);
   return scale(ratio).hex();
 }
+
+function formatPrice(value) {
+  return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+}
+
+function formatWithThousandsSeparator(value) {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
 var isMobile = window.innerWidth < 1200;
+let idBarrioActual = null;
 function onEachFeature(feature, layer, fecha, property, minValue, maxValue) {
   if (feature.properties) {
     let value = parseFloat(feature.properties.data[fecha][property]);
@@ -96,8 +107,8 @@ function onEachFeature(feature, layer, fecha, property, minValue, maxValue) {
     let tooltipContent = '<b>' + feature.properties.name + '</b><br />' +
                          'Distrito: ' + feature.properties.Distrito +
                          '<br />Fecha: ' + fecha +
-                         '<br /> Precio: ' + feature.properties.data[fecha].Precio + 
-                         '<br /> P/m2: ' + feature.properties.data[fecha]['p/m2'] +
+                         '<br /> Precio: ' + formatPrice(feature.properties.data[fecha].Precio) + 
+                         '<br /> P/m2: ' + formatWithThousandsSeparator(Math.round(feature.properties.data[fecha]['p/m2'])) +
                          '<br /> Cantidad: ' + feature.properties.data[fecha]['Cantidad'];
     if (!isMobile) {  // No asociar el tooltip si es móvil
       layer.bindTooltip(tooltipContent);
@@ -115,15 +126,9 @@ function onEachFeature(feature, layer, fecha, property, minValue, maxValue) {
       var detalles = document.getElementById('detallesBarrio');
       var detallesSubidasBajadas = document.getElementById('detallesSubidasBajadasPrecio');
       var nombreBarrioActual = feature.properties.name;
-      var idBarrioActual = feature.id; // Obtener el ID del barrio
+      idBarrioActual = feature.id; // Obtener el ID del barrio
 
-      function formatPrice(value) {
-        return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
-      }
-      
-      function formatWithThousandsSeparator(value) {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
+
 
       document.getElementById("infoInicial").style.display = "none";
       // Si los detalles ya están siendo mostrados y el barrio actual es el mismo que el último en el que se hizo clic
@@ -254,6 +259,47 @@ function actualizarMapa(fecha, property) {
       }).addTo(mymap);
     }
   }
+  if (idBarrioActual) {
+    // Buscar el barrio por ID
+    let barrioSeleccionado = null;
+    for (let key in datosBarrios) {
+        if (datosBarrios[key].id === idBarrioActual) {
+            barrioSeleccionado = datosBarrios[key];
+            break;
+        }
+    }
+
+    if (barrioSeleccionado && barrioSeleccionado.properties.data[fecha]) {
+      var dataForDate = barrioSeleccionado.properties.data[fecha];
+      detallesBarrio.innerHTML = `
+          <span id="cerrar" class="cerrar">&times;</span>
+          <h2><a class="links-barrios" href='graficos.html'>${barrioSeleccionado.properties.name}</a></h2>
+          <br>
+          <table>
+            <tr>
+                <td>Distrito:</td>
+                <td>${barrioSeleccionado.properties.Distrito}</td>
+            </tr>
+            <tr>
+                <td>Fecha:</td>
+                <td>${fecha}</td>
+            </tr>
+            <tr>
+                <td>Precio:</td>
+                <td>${formatPrice(dataForDate.Precio)}</td>
+            </tr>
+            <tr>
+                <td>P/m<sup>2</sup>:</td>
+                <td>${formatWithThousandsSeparator(Math.round(dataForDate['p/m2']))} €</td>
+            </tr>
+            <tr>
+                <td>Cantidad:</td>
+                <td>${formatWithThousandsSeparator(Math.round(dataForDate['Cantidad']))}</td>
+            </tr>
+          </table>
+      `;
+    }
+  }
 }
 
 var fechaRange = document.getElementById('fechaRange');
@@ -301,5 +347,25 @@ for(let i = 0; i < propiedades.length; i++) {
     });
 }
 
+// Event listener for the backward button
+document.getElementById('rangeBackward').addEventListener('click', function() {
+  if (fechaRange.value > fechaRange.min) {
+      fechaRange.value -= 1;
+      fechaRange.dispatchEvent(new Event('input'));  // Trigger the input event to update the map
+  }
+});
+
+// Event listener for the forward button
+document.getElementById('rangeForward').addEventListener('click', function() {
+  if (fechaRange.value < fechaRange.max) {
+      fechaRange.value = parseInt(fechaRange.value) + 1;
+      fechaRange.dispatchEvent(new Event('input'));  // Trigger the input event to update the map
+  }
+});
+
 // Actualizar el mapa inicialmente con fecha más reciente y la propiedad "Precio"
 actualizarMapa(fechas[fechaMax], getPropiedadSeleccionada());
+
+// Llamar a la función de actualización para los botones también
+document.getElementById('rangeBackward').addEventListener('click', updateDetallesBarrio);
+document.getElementById('rangeForward').addEventListener('click', updateDetallesBarrio);

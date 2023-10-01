@@ -18,12 +18,22 @@
         box-sizing: border-box;
       }
 
-      body {
-          background-color: #D4DADC;
-          
+
+      @media (max-width: 1400px) {
+        html {
+          font-size: 25px;
+        }
       }
-
-
+      @media (max-width: 768px) {
+        html {
+          font-size: 18px;
+        }
+      }
+      @media (max-width: 450px) {
+        html {
+          font-size: 12px;
+        }
+      }
       nav{
           display: flex;
           justify-content: space-around;
@@ -76,8 +86,32 @@
       .burger {
           display: none;
       }
+          /* Style for the range slider buttons */
+    .slider-container button {
+        background-color: #2688fb; /* Green background */
+        border: none; /* Remove border */
+        color: white; /* White text */
+        padding: 3px 6px; /* Some padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 3px 2px;
+        cursor: pointer;
+        border-radius: 4px; /* Rounded corners */
+        transition-duration: 0.4s; /* Transition effect */
+    }
+
+    @media (min-width: 1201px) {
+      .slider-container button:hover {
+          background-color: white; /* White background */
+          color: #2688fb; /* Blue text */
+      }
+    }
+
       /* Cuando la pantalla es de 768px o menos, mostramos el menú hamburguesa y ocultamos el menú principal */
       @media (max-width: 1200px) {
+
         .burger{
             display: block;
             cursor: pointer;
@@ -277,26 +311,50 @@
 
       /* Estilos para dispositivos móviles */
       @media (max-width: 1200px) {
+
         .slider-container {
           z-index: 900;
           position: absolute;
-          display: inline-block;
+          display: flex;
           top: auto;
-          bottom: 25px; /* Espacio desde la parte inferior de la pantalla */
-          right: 0px; /* Espacio desde la derecha de la pantalla */
-          margin-bottom: 15px;
-          
+          bottom: 5%;
+          left: 50%; /* Centra el elemento horizontalmente respecto a su contenedor */
+          transform: translateX(-50%); /* Ajusta el elemento para que esté perfectamente centrado en el eje X */
+          padding: 0px;
+          right: 0;
+          margin: 0;
+          padding: 0px 15px;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+        
+        @keyframes clickAnimation {
+          0%   { background-color: #2688fb; }  /* Color original */
+          50%  { background-color: #FF5733; }  /* Color de resalte al clicar */
+          100% { background-color: #2688fb; }  /* Vuelve al color original */
+        }
+        /* Style for the range slider buttons */
+        .slider-container button {
+          padding: 6px 12px; /* Some padding */
+          font-size: 15px;
+          position: relative;
+          right: 1%;
+          margin: 0 5px;
+        } 
+
+        .slider-container button:active {
+            animation: clickAnimation 0.7s;  /* Aplica la animación con una duración de 0.5 segundos */
         }
 
         .detallesSubidasBajadasPrecio {
           display: none !important;
         }
         .slider-container p{
-          font-size: 1.8vh;
+          font-size: 1.5rem;
           padding: 10px;
           position: absolute;
           bottom: 30px;
-          left: 60px;
           font-weight: bold;
         }
         .radio-buttons-container {
@@ -345,10 +403,10 @@
           border-radius: 15px; /* Igual que arriba */
         }
         input[type=range] {
-            height: 25px;
-            width: 315px;
-            position: relative;
-            right: 15%;
+          height: 25px;
+          width: 50%; /* Aumenta este valor según tus necesidades */
+          position: relative;
+
         }
         input[type=range]::-webkit-slider-thumb,
         input[type=range]::-moz-range-thumb {
@@ -358,9 +416,11 @@
         .detallesBarrio {
           display: none;
           position: absolute;
-          top: 35%; /* Ajusta esto para cambiar cuánto espacio hay desde la parte superior del contenedor */
-          right: 15%; /* Ajusta esto para cambiar cuánto espacio hay desde la derecha del contenedor */
-          width: auto; /* Ajusta esto para cambiar el ancho de los detalles del barrio */
+          top: 50%; /* Centra el elemento verticalmente respecto a su contenedor */
+          left: 50%; /* Centra el elemento horizontalmente respecto a su contenedor */
+          transform: translate(-50%, -50%); /* Ajusta el elemento para que esté perfectamente centrado */
+          right: auto; /* Restablece la propiedad right a su valor por defecto */
+          width: 80%; /* Establece un ancho máximo para el contenedor en dispositivos móviles */
           height: auto; /* Esto hace que los detalles del barrio sean tan altos como su contenido, pero puedes ajustarlo como quieras */
           background-color: rgb(51, 51, 51);
           opacity: 0.9;
@@ -382,7 +442,7 @@
         max-width: 400px; /* Ancho máximo para evitar que sea demasiado grande en pantallas pequeñas */
         backdrop-filter: blur(10px); /* Fondo borroso */
         border-radius: 15px; /* Bordes redondeados */
-    }
+        }
       }
       .icon-help {
         top: 6px;
@@ -403,6 +463,7 @@
       .icon-help::before {
         content: "?";  /* Inserta el signo de interrogación */
       }
+
         </style>
   </head>
   <body>
@@ -442,7 +503,9 @@
     </div>
     <div class="slider-container">
       <p id="fechaDisplay" style="text-align: center;"></p>
-      <input type="range" id="fechaRange" class="range">
+      <button id="rangeBackward" style="display: inline-block;">&lt;</button>
+      <input type="range" id="fechaRange" class="range" style="display: inline-block;">
+      <button id="rangeForward" style="display: inline-block;">&gt;</button>
     </div>
     <div id="detallesBarrio" class="detallesBarrio">
       <span id="cerrar" class="cerrar">&times;</span>

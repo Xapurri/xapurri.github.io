@@ -11,3 +11,11 @@ replicarlo para los pisos de compra de cada barrio, distrito y de Barcelona en g
 
 
 
+V0.1.3
+
+01.10.2023 - 
+
+Añadimos botones para la interfaz tanto web como dispositivos móviles
+Arreglo de bugs en la GUI
+
+
