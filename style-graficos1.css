@@ -32,13 +32,26 @@ h1, h2, h3 {
     font-size: 16px;
 }
 
-/* Responsive design */
-@media screen and (max-width: 768px) {
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 1200px) {
     .chart-container {
         flex-direction: column;
+        
     }
     
     #histPrecio, #histM2 {
-        width: 100%;
+        width: 92% !important;
+        height: 360px;
+    }
+
+    /* Ajustar el tamaño de los títulos y otros textos para dispositivos móviles */
+    h1, h2, h3, .titulo-graficos {
+        font-size: 14px;
+    }
+
+    /* Ajustar el padding de los gráficos para dispositivos móviles */
+    #title, #histPrecio, #histM2, #barrioPrecio, #barrioDist, #pisosFecha {
+        padding: 10px;
     }
 }

@@ -17,7 +17,7 @@
  var json_aumento_decrementos_barrios = {'32': {'name': "El Camp d'en Grassot i Gràcia Nova", 'increase': {'Menores o igual al 5%': 1, 'Entre el 5% y el 10%': 2, 'Mayores al 10%': 2}, 'decrease': {'Menores o igual al 5%': 4, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 6}}, '31': {'name': 'Vila de Gràcia', 'increase': {'Menores o igual al 5%': 7, 'Entre el 5% y el 10%': 5, 'Mayores al 10%': 8}, 'decrease': {'Menores o igual al 5%': 12, 'Entre el 5% y el 10%': 4, 'Mayores al 10%': 12}}, '28': {'name': 'Vallcarca i els Penitents', 'increase': {'Menores o igual al 5%': 1, 'Entre el 5% y el 10%': 0, 'Mayores al 10%': 0}, 'decrease': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 1}}, '29': {'name': 'El Coll', 'increase': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 0}, 'decrease': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 2, 'Mayores al 10%': 1}}, '30': {'name': 'La Salut', 'increase': {}, 'decrease': {'Menores o igual al 5%': 2, 'Entre el 5% y el 10%': 0, 'Mayores al 10%': 2}}}
  
  
-
+var isMobile = window.innerWidth <= 1200;
 var optionsPrecio = {
     chart: {
         type: 'bar',
@@ -28,16 +28,21 @@ var optionsPrecio = {
         data: num_pisos
     }],
     xaxis: {
-        categories: keys_precio
+        categories: keys_precio,
+        labels: {
+            style: {
+                fontSize: isMobile ? '10px' : '12px'  // Tamaño de fuente más pequeño para móviles
+            }
+        }
     },
     title: {
-        text: 'Distribución del Precio de los Pisos',
+        text: 'Distribución del Precio',
         align: 'left'
     },
     plotOptions: {
         bar: {
             horizontal: false,
-            columnWidth: '55%',
+            columnWidth: isMobile ? '80%' : '55%',
             endingShape: 'rounded'
         },
     },
@@ -59,7 +64,7 @@ var optionsM2 = {
         categories: keys_m2
     },
     title: {
-        text: 'Distribución de Metros Cuadrados (m2) de los Pisos',
+        text: 'Distribución de m2',
         align: 'left'
     },
     plotOptions: {
