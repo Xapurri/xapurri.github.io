@@ -1,6 +1,6 @@
 {
-    "name": "Mapa de los Barrios de Barcelona",
-    "short_name": "Barcelona Map",
+    "name": "BCN - DATA",
+    "short_name": "BCN - DATA",
     "description": "Una aplicación interactiva para analizar la evolución de los precios por barrio en Barcelona.",
     "start_url": "/",
     "display": "standalone",
