@@ -9,7 +9,7 @@
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"></script>
-
+    <link rel="icon" href="images/icon/icon.ico" type="image/x-icon">
     <style>
       *{
         margin: 0;
@@ -362,6 +362,7 @@
           right: 0%; /* Espacio desde la derecha de la pantalla */
           padding: 20px;
           display: flex;
+          align-items: flex-start;
         }
 
         .radio-buttons-container input[type="radio"] + span {
@@ -372,9 +373,10 @@
           font-size: 1.5vh;
           margin: 5px;
           display: flex;
-          flex-wrap: nowrap;
-          flex-direction: row;
+          flex-direction: column;
           align-items: center;
+          flex-wrap: nowrap;
+          
          }
 
         input[type=range] {
@@ -440,7 +442,6 @@
         transform: translate(-50%, -50%); /* Centra el contenedor en la pantalla */
         width: 90%; /* Ocupa el 90% del ancho de la pantalla */
         max-width: 400px; /* Ancho máximo para evitar que sea demasiado grande en pantallas pequeñas */
-        backdrop-filter: blur(10px); /* Fondo borroso */
         border-radius: 15px; /* Bordes redondeados */
         }
       }
@@ -486,7 +487,7 @@
     <div id="mapid">
       <form class="radio-buttons-container">
         <div class="icon-help"></div>
-        <label for=""><span><strong>Seleccionar Mapa</strong></span></label>
+        <label for=""><span><strong>Selecciona</strong></span></label>
         <label>
             <input type="radio" name="propiedad" value="Precio" checked>
             Precio de Venta
@@ -556,7 +557,8 @@
           
           // Comprobamos si el contenedor está siendo mostrado o no
           if (infoContainer.style.display === "none" || infoContainer.style.display === "") {
-              infoContainer.style.display = "block";  // Mostramos el contenedor
+              infoContainer.style.display = "block";
+              detallesBarrio.style.display = "none";  // Mostramos el contenedor
           }
       });
       </script>
