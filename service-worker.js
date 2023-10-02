@@ -1,4 +1,4 @@
-let cache_version = cache_v013
+let cache_version = cache_v013_1
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
