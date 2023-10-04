@@ -2,11 +2,14 @@
 
 // Variables a usar
 
+
  // Gráfico de distribución del precio
  var num_pisos = [39, 134, 204, 124, 119, 70, 40, 26, 19, 4, 0]
  var keys_precio = ['[600, 900)', '[900, 1200)', '[1200, 1500)', '[1500, 1800)', '[1800, 2100)', '[2100, 2400)', '[2400, 2700)', '[2700, 3000)', '[3000, 3300)', '[3300, 3600)', '[3600, 3900)']
  var values_m2 = [13, 33, 70, 95, 162, 115, 103, 80, 54, 24, 24, 6]
  var keys_m2 = ['[20, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)', '[100, 110)', '[110, 120)', '[120, 130)', '[130, 140)']
+ var values_precio_m2 = [10, 27, 63, 90, 98, 95, 77, 58, 73, 51, 27, 26, 15, 12]
+ var keys_precio_m2 = ['[10, 12)', '[12, 14)', '[14, 16)', '[16, 18)', '[18, 20)', '[20, 22)', '[22, 24)', '[24, 26)', '[26, 28)', '[28, 30)', '[30, 32)', '[32, 34)', '[34, 36)', '[36, 38)']
  var values_barrio = [1731.03, 1637.92, 1486.56, 1371.75, 1186.41]
  var num_pisos_barrio = [423, 200, 63, 61, 32]
  var keys_barrio_dist = ['Vila de Gràcia', "El Camp d'en Grassot i Gràcia Nova", 'La Salut', 'Vallcarca i els Penitents', 'El Coll']
@@ -19,6 +22,15 @@
  
 var isMobile = window.innerWidth <= 1200;
 var optionsPrecio = {
+
+    dataLabels: {
+        enabled: true,
+        offsetY: isMobile ? 30 : 0,
+        style: {
+            fontSize: isMobile ? '12px' : '12px',
+            colors: isMobile ? ['#000'] : ['#fff'], // Cambia el color de las etiquetas de datos a negro
+        }
+    },
     chart: {
         type: 'bar',
         height: 350
@@ -46,12 +58,27 @@ var optionsPrecio = {
             endingShape: 'rounded'
         },
     },
+    tooltip: {
+        theme: 'dark', // Establece el tema del tooltip a oscuro para que el fondo sea oscuro
+        style: {
+            fontSize: '12px',  // Ajusta el tamaño de fuente si es necesario
+            colors: ['#000000']  // Color negro para todos los textos en el tooltip
+        }
+    },
 };
 var chartPrecio = new ApexCharts(document.querySelector("#histPrecio"), optionsPrecio);
 chartPrecio.render();
 
 // Gráfico de distribución de m2
 var optionsM2 = {
+    dataLabels: {
+        enabled: true,
+        offsetY: isMobile ? 30 : 0,
+        style: {
+            fontSize: isMobile ? '12px' : '12px',
+            colors: isMobile ? ['#000'] : ['#fff'], // Cambia el color de las etiquetas de datos a negro
+        }
+    },
     chart: {
         type: 'bar',
         height: 350
@@ -64,7 +91,7 @@ var optionsM2 = {
         categories: keys_m2
     },
     title: {
-        text: 'Distribución de m2',
+        text: 'Distribución del m2',
         align: 'left'
     },
     plotOptions: {
@@ -73,6 +100,13 @@ var optionsM2 = {
             columnWidth: '55%',
             endingShape: 'rounded'
         },
+    },
+    tooltip: {
+        theme: 'dark', // Establece el tema del tooltip a oscuro para que el fondo sea oscuro
+        style: {
+            fontSize: '12px',  // Ajusta el tamaño de fuente si es necesario
+            colors: ['#000000']  // Color negro para todos los textos en el tooltip
+        }
     },
 };
 var chartM2 = new ApexCharts(document.querySelector("#histM2"), optionsM2);
@@ -100,6 +134,7 @@ chartM2.render();
     },
     dataLabels: {
         enabled: true,
+        offsetY: isMobile ? 30 : 0,
         formatter: function (value, { seriesIndex }) {
             // Si es la serie "Precio Promedio" (índice 0), añade el símbolo de €
             if (seriesIndex === 0) {
@@ -110,11 +145,11 @@ chartM2.render();
         },
         style: {
             fontSize: '12px',
-            colors: ['#fff']  // Puedes ajustar el color y tamaño según tus necesidades
+            colors: isMobile ? ['#000'] : ['#fff']  // Puedes ajustar el color y tamaño según tus necesidades
         }
     },
     title: {
-        text: 'Precio Promedio y Distribución de Pisos por Barrio',
+        text: 'Distribución por Barrio',
         align: 'left'
     },
     plotOptions: {
@@ -123,6 +158,13 @@ chartM2.render();
             columnWidth: '55%',
             endingShape: 'rounded'
         },
+    },
+    tooltip: {
+        theme: 'dark', // Establece el tema del tooltip a oscuro para que el fondo sea oscuro
+        style: {
+            fontSize: '12px',  // Ajusta el tamaño de fuente si es necesario
+            colors: ['#000000']  // Color negro para todos los textos en el tooltip
+        }
     },
 };
 var chartCombinedBarrio = new ApexCharts(document.querySelector("#barrioPrecio"), optionsCombinedBarrio);
@@ -174,7 +216,9 @@ var optionsPisosFecha = {
             seriesName: 'Añadidos',  // Asociar este eje y con la serie 'Añadidos'
             title: {
                 text: 'Añadidos y Retirados'
-            }
+            },
+            min: 0,
+            max: Math.max(Math.max(...values_entrada),Math.max(...values_salida)) + 10
         },
         {
             seriesName: 'Añadidos',  // Asociar este eje y con la serie 'Añadidos'
@@ -187,14 +231,21 @@ var optionsPisosFecha = {
                 text: 'Número de Pisos Ofertados'
             },
             min: 0,
-            max: Math.max(...num_pisos_en_alquiler) + 10
+            max: Math.max(...num_pisos_en_alquiler) + 50
         }
     ],
     xaxis: {
-        categories: keys_entrada
+        categories: keys_entrada,
+        tickAmount: isMobile ? 3 : undefined, // Ajusta esto a la cantidad deseada de etiquetas en móviles
+        labels: {
+            rotate: isMobile ? -45 : 0,  // Rotar las etiquetas para mejorar la legibilidad
+            trim: true,
+            minHeight: undefined,
+            maxHeight: 120
+        }
     },
     title: {
-        text: 'Número de Pisos Añadidos, Retirados y Ofertados por Fecha',
+        text: 'Histórico de Pisos',
         align: 'left'
     },
     legend: {
@@ -229,3 +280,49 @@ var optionsPisosFecha = {
 };
 var chartPisosFecha = new ApexCharts(document.querySelector("#pisosFecha"), optionsPisosFecha);
 chartPisosFecha.render();
+
+
+
+// Agrega este código después de que hayas renderizado todos tus gráficos
+var isPrecioGraph = true; // Flag para saber qué datos se están mostrando
+
+// Definimos la función que actualiza el gráfico y el botón
+function updateGraphAndButton() {
+    var button = document.getElementById('toggleGraph');  // Obtener el botón
+    
+    if (isPrecioGraph) {
+        chartPrecio.updateOptions({
+            series: [{
+                name: 'Número de Pisos',
+                data: values_precio_m2
+            }],
+            xaxis: {
+                categories: keys_precio_m2
+            },
+            title: {
+                text: 'Distribución del Precio / m²',
+            },
+        });
+        button.textContent = "Precio";  // Cambiar el texto del botón
+    } else {
+        chartPrecio.updateOptions({
+            series: [{
+                name: 'Número de Pisos',
+                data: num_pisos
+            }],
+            xaxis: {
+                categories: keys_precio
+            },
+            title: {
+                text: 'Distribución del Precio',
+            },
+        });
+        button.textContent = "P/m2";  // Cambiar el texto del botón
+    }
+    isPrecioGraph = !isPrecioGraph;
+}
+
+// Agregamos el event listener al botón existente
+document.getElementById('toggleGraph').addEventListener('click', updateGraphAndButton);
+
+

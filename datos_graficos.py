@@ -4,7 +4,7 @@ import pandas as pd
 import os, re
 
 # 1. Leer el archivo Excel
-file_path = "../base_datos_acumulativa.xlsx"
+file_path = "../Datos pisos alquiler/Gracia/base_datos_acumulativa.xlsx"
 data = pd.read_excel(file_path)
 
 # 2. Procesar y preparar los datos para los gráficos
