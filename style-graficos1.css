@@ -84,12 +84,30 @@ h1, h2, h3 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 12px;
-    z-index: 999;
+    z-index: 900;
 }
 
 .toggle-btn:hover {
     background-color: #006FDB;
 }
+
+.toggle-btn-alq-pdte {
+    position: absolute;
+    left: 51%;
+    background-color: #008FFB;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 900;
+}
+
+.toggle-btn-alq-pdte:hover {
+    background-color: #006FDB;
+}
+
 
 /* Estilos específicos para dispositivos móviles */
 @media (max-width: 1200px) {
@@ -126,5 +144,10 @@ h1, h2, h3 {
 
     .toggle-btn{
         right: 5%;
+        top:30px;
+    }
+
+    .toggle-btn-alq-pdte {
+        top: 15%;
     }
 }
