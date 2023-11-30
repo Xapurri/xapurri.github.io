@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCN - DATA</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="./style-graficos1.css">
+    <link rel="stylesheet" href="nav-style.css">
+    <link rel="icon" href="images/icon/icon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/c81800144b.js" crossorigin="anonymous"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    </head>
+    <body>
+    <nav>
+        <div class="logo">
+            <h4><a style="    color: #ffffff; text-decoration: none;" href="index.html">BCN - Data</a></h4>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Mapa</a></li>
+            <li><a href="graficos.html">Gráficos</a></li>
+            <li><a href="info.html">Información</a></li>
+            <li><a href="about.html">Contacto</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="chart-container titulo-graficos" id="title" style="font-size: 2vh; font-weight: 400; display: flex; flex-direction: column; justify-content: none;">
+        <section id="info">
+            <h2 style="color: black;">BCN-DATA</h2>
+    
+            <article id="objetivo-proyecto">
+                <h3 style="color: black;">Objetivo del Proyecto</h3>
+                <p>
+                    BCN-DATA es un recurso dedicado a proveer una serie histórica comprensiva de los precios de venta de inmuebles en Barcelona, desglosados por barrios. El objetivo es ofrecer de una manera visual la evolución de los precios inmobiliarios, permitiendo a cualquier interesado acceder a datos detallados sobre cómo estos han cambiado a lo largo del tiempo.
+                </p>
+            </article>
+    
+            <article id="datos-metodologia">
+                <h3 style="color: black;">Datos y Metodología</h3>
+    
+                <h4>Recopilación de Datos:</h4>
+                <p>
+                    Se recopilan mensualmente datos actualizados que reflejan no solo el precio y el precio por metro cuadrado de los inmuebles, sino también la cantidad de propiedades disponibles en el mercado. Además, se ofrece información detallada de las propiedades, incluyendo el número de habitaciones, ubicación aproximada, cambios de precio y tiempo en el mercado.
+                </p>
+    
+                <h4>Fuentes de Datos:</h4>
+                <p>
+                    Los datos presentados son el resultado de una meticulosa recopilación de múltiples fuentes, procesados para crear una visión integral del mercado inmobiliario barcelonés.
+                </p>
+                <h4>Procesado de Datos:</h4>
+                <p>
+                    Con fines estadísticos, se descartan los datos atípicos, es decir, aquellos valores que se alejan mucho de la media mediante el uso del rango intercuartílico (IQR).
+                </p>
+    
+                <h4>Interfaz y Visualización de Datos:</h4>
+                <p>
+                    La interfaz permite a los usuarios visualizar datos relacionados con el precio, el precio por metro cuadrado y el número de inmuebles ofertados. Además, la sección de gráficos proporciona un análisis más profundo de los distintos distritos de Barcelona.
+                </p>
+    
+                <h4>Interacción del Usuario:</h4>
+                <p>
+                    Los usuarios de BCN-DATA pueden explorar diversos gráficos que detallan las tendencias inmobiliarias por barrio. Para aquellos que buscan una comprensión más profunda o datos más específicos, ofrecemos la posibilidad de <a href="about.html">contacto</a>.
+                </p>
+
+            </article>
+        </section>
+    </div>
+    </body>

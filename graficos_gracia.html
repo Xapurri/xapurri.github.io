@@ -21,13 +21,13 @@
 <body>
 <nav>
     <div class="logo">
-        <h4><a style="    color: #ffffff; text-decoration: none;" href="index.html">BCN - Data</a></h4>
+        <h4>BCN - Data</h4>
     </div>
     <ul class="nav-links">
         <li><a href="index.html">Mapa</a></li>
         <li><a href="graficos.html">Gráficos</a></li>
-        <li><a href="info.html">Información</a></li>
-        <li><a href="about.html">Contacto</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+        <li><a href="about.html">About</a></li>
     </ul>
     <div class="burger">
         <div class="line1"></div>
@@ -36,19 +36,9 @@
     </div>
 </nav>
 <div class="chart-container titulo-graficos" id="title">
-    Pisos en Venta - Barcelona
-    <button id="toggleData" class="toggle-btn-alq-pdte">Mostrar Pisos en Oferta</button>
-    <a href="" target="_blank" id="pdf-icon"><i class="fa-regular fa-file-pdf"></i></a>
-    
-</div>
-<div class="chart-container titulo-graficos" id="title" style="font-size: 2vh; font-weight: 400; display: flex; flex-direction: column; justify-content: none;">
-    <p>
-        Explora los gráficos detallados sobre viviendas, incluyendo tanto las <b>vendidas</b> como las que aún están <b>disponibles</b>.<br><br>
-        Puedes seleccionar entre estas categorías utilizando el botón situado arriba.
-    </p>
-    <p style="font-size: 1.8vh;">
-        Para consultar la metodología empleada, puedes consultar el apartado de <a style="font-weight: bold; text-decoration: none;" href="info.html">Información</a>.
-    </p>
+    Pisos en Alquiler - Distrito de Gracia, Barcelona
+    <button id="toggleData" class="toggle-btn-alq-pdte">Mostrar Pendientes</button>
+    <a href="src/Informe_Pisos_Gracia.pdf" target="_blank" id="pdf-icon"><i class="fa-regular fa-file-pdf"></i></a>
     
 </div>
 <div class="chart-container dstr-pisos">
@@ -85,6 +75,6 @@
     });
 
 </script>
-<script src="datos_graficos.js"></script>
+<script src="datos_graficos_gracia.js"></script>
 </body>
 </html>

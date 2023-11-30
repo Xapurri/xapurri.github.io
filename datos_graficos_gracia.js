@@ -1,36 +1,39 @@
 
 
- // Gráfico de distribución del precio
- 
- // Variables para los gráficos de los pisos alquilados
- var alquilados_values_precio = [603, 5576, 7313, 6211, 3558, 2054, 1544, 1182, 799];
- var alquilados_keys_precio = ['[0, 100000)', '[100000, 200000)', '[200000, 300000)', '[300000, 400000)', '[400000, 500000)', '[500000, 600000)', '[600000, 700000)', '[700000, 800000)', '[800000, 900000)'];
- var alquilados_values_m2 = [119, 557, 1159, 2830, 4600, 4499, 3972, 3014, 2526, 1499, 1042, 1030, 801, 611, 398, 416, 344];
- var alquilados_keys_m2 = ['[20, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)', '[100, 110)', '[110, 120)', '[120, 130)', '[130, 140)', '[140, 150)', '[150, 160)', '[160, 170)', '[170, 180)', '[180, 190)'];
- var alquilados_values_precio_m2 = [56, 1253, 5705, 8534, 7379, 4342, 2089, 1005, 461];
- var alquilados_keys_precio_m2 = ['[0, 1000)', '[1000, 2000)', '[2000, 3000)', '[3000, 4000)', '[4000, 5000)', '[5000, 6000)', '[6000, 7000)', '[7000, 8000)', '[8000, 9000)'];
- var alquilados_values_barrio = [384838.12, 440467.17, 289370.73, 570658.55, 732059.53, 198919.24, 280408.23, 366896.1, 282295.39, 996182.78];
- var alquilados_values_barrio_dist = [4098, 2050, 2574, 6979, 1339, 2393, 1972, 3762, 3504, 2899];
- var alquilados_keys_barrio_dist = ['Ciutat Vella', 'Gràcia', 'Horta - Guinardó', "L'Eixample", 'Les Corts', 'Nou Barris', 'Sant Andreu', 'Sant Martí', 'Sants - Montjuïc', 'Sarrià - Sant Gervasi'];
- 
- // Variables para los gráficos de los pisos pendientes de alquilar
- var pendientes_values_precio = [260, 2277, 3063, 2460, 1776, 1129, 745, 682, 512];
- var pendientes_keys_precio = ['[0, 100000)', '[100000, 200000)', '[200000, 300000)', '[300000, 400000)', '[400000, 500000)', '[500000, 600000)', '[600000, 700000)', '[700000, 800000)', '[800000, 900000)'];
- var pendientes_values_m2 = [43, 246, 591, 1192, 1863, 1941, 1799, 1422, 1188, 771, 609, 502, 404, 327, 278, 294, 232];
- var pendientes_keys_m2 = ['[20, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)', '[100, 110)', '[110, 120)', '[120, 130)', '[130, 140)', '[140, 150)', '[150, 160)', '[160, 170)', '[170, 180)', '[180, 190)'];
- var pendientes_values_precio_m2 = [34, 610, 2334, 3289, 3454, 2214, 1343, 800, 453];
- var pendientes_keys_precio_m2 = ['[0, 1000)', '[1000, 2000)', '[2000, 3000)', '[3000, 4000)', '[4000, 5000)', '[5000, 6000)', '[6000, 7000)', '[7000, 8000)', '[8000, 9000)'];
- var pendientes_values_barrio = [469524.53, 573134.12, 314896.26, 764145.89, 1239435.65, 194233.87, 291491.51, 499854.72, 302854.05, 1202901.64];
- var pendientes_values_barrio_dist = [2634, 879, 1320, 3102, 680, 1011, 818, 1646, 1664, 1604];
- var pendientes_keys_barrio_dist = ['Ciutat Vella', 'Gràcia', 'Horta - Guinardó', "L'Eixample", 'Les Corts', 'Nou Barris', 'Sant Andreu', 'Sant Martí', 'Sants - Montjuïc', 'Sarrià - Sant Gervasi'];
- 
- 
- var values_entrada = [2913, 6686, 5210, 7780, 5002, 1724] 
- var values_salida = [3222, 7065, 5327, 8796, 5278, 1882]
- var num_pisos_en_alquiler = [17147, 16624, 16474, 15424, 15105, 15357]
- var keys_entrada = ['2023-01-16', '2023-02-28', '2023-03-31', '2023-06-28', '2023-07-31', '2023-08-31']
- 
- 
+// Variables a usar
+
+// Gráfico de distribución del precio
+
+// Variables para los gráficos de los pisos alquilados
+var alquilados_values_precio = [31, 106, 141, 88, 74, 25, 15, 9, 0, 0, 0];
+var alquilados_keys_precio = ['[600, 900)', '[900, 1200)', '[1200, 1500)', '[1500, 1800)', '[1800, 2100)', '[2100, 2400)', '[2400, 2700)', '[2700, 3000)', '[3000, 3300)', '[3300, 3600)', '[3600, 3900)'];
+var alquilados_values_m2 = [9, 22, 49, 65, 93, 80, 61, 53, 30, 17, 12, 3];
+var alquilados_keys_m2 = ['[20, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)', '[100, 110)', '[110, 120)', '[120, 130)', '[130, 140)'];
+var alquilados_values_precio_m2 = [10, 25, 52, 75, 77, 70, 48, 31, 38, 23, 13, 9, 7, 7];
+var alquilados_keys_precio_m2 = ['[10, 12)', '[12, 14)', '[14, 16)', '[16, 18)', '[18, 20)', '[20, 22)', '[22, 24)', '[24, 26)', '[26, 28)', '[28, 30)', '[30, 32)', '[32, 34)', '[34, 36)', '[36, 38)'];
+var alquilados_values_barrio = [1673.83, 1560.96, 1554.27, 1532.93, 1146.14];
+var alquilados_values_barrio_dist = [284, 121, 52, 41, 22];
+var alquilados_keys_barrio_dist = ['Vila de Gràcia', "El Camp d'en Grassot i Gràcia Nova", 'La Salut', 'Vallcarca i els Penitents', 'El Coll'];
+
+// Variables para los gráficos de los pisos pendientes de alquilar
+var pendientes_values_precio = [8, 28, 63, 40, 49, 47, 32, 23, 12, 18, 9];
+var pendientes_keys_precio = ['[600, 900)', '[900, 1200)', '[1200, 1500)', '[1500, 1800)', '[1800, 2100)', '[2100, 2400)', '[2400, 2700)', '[2700, 3000)', '[3000, 3300)', '[3300, 3600)', '[3600, 3900)'];
+var pendientes_values_m2 = [4, 11, 21, 30, 71, 43, 46, 30, 25, 8, 14, 8];
+var pendientes_keys_m2 = ['[20, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)', '[100, 110)', '[110, 120)', '[120, 130)', '[130, 140)'];
+var pendientes_values_precio_m2 = [2, 10, 20, 22, 31, 26, 32, 32, 41, 29, 18, 18, 8, 6];
+var pendientes_keys_precio_m2 = ['[10, 12)', '[12, 14)', '[14, 16)', '[16, 18)', '[18, 20)', '[20, 22)', '[22, 24)', '[24, 26)', '[26, 28)', '[28, 30)', '[30, 32)', '[32, 34)', '[34, 36)', '[36, 38)'];
+var pendientes_values_barrio = [2359.47, 1934.04, 1770.83, 1752.38, 1564.35];
+var pendientes_values_barrio_dist = [192, 92, 23, 21, 12];
+var pendientes_keys_barrio_dist = ['Vila de Gràcia', "El Camp d'en Grassot i Gràcia Nova", 'Vallcarca i els Penitents', 'La Salut', 'El Coll'];
+
+// Transversal
+var values_entrada = [19, 5, 13, 14, 7, 12, 13, 4, 10, 21, 14, 16, 22, 23, 7, 30, 15, 24, 13, 32, 3, 5, 13, 19, 13, 9, 13, 4, 10, 10, 9, 24, 12, 1, 3, 2, 8] 
+var values_salida = [3, 10, 14, 22, 17, 15, 10, 3, 6, 19, 9, 23, 23, 16, 11, 19, 18, 30, 20, 10, 2, 3, 18, 24, 25, 15, 17, 2, 16, 16, 22, 30, 13, 1, 6, 2, 10]
+var num_pisos_en_alquiler = [404, 399, 396, 383, 372, 367, 370, 373, 377, 373, 377, 366, 359, 252, 369, 379, 376, 374, 365, 390, 391, 393, 386, 385, 375, 367, 361, 362, 357, 355, 345, 346, 344, 344, 341, 341, 340]
+var keys_entrada = ['2023-08-20', '2023-08-21', '2023-08-22', '2023-08-23', '2023-08-24', '2023-08-25', '2023-08-26', '2023-08-27', '2023-08-28', '2023-08-29', '2023-08-30', '2023-08-31', '2023-09-01', '2023-09-03', '2023-09-04', '2023-09-05', '2023-09-06', '2023-09-07', '2023-09-08', '2023-09-09', '2023-09-10', '2023-09-11', '2023-09-12', '2023-09-13', '2023-09-14', '2023-09-15', '2023-09-16', '2023-09-17', '2023-09-18', '2023-09-19', '2023-09-20', '2023-09-21', '2023-09-22', '2023-09-23', '2023-09-24', '2023-09-25', '2023-09-26']
+var json_aumento_decrementos_barrios = {'32': {'name': "El Camp d'en Grassot i Gràcia Nova", 'increase': {'Menores o igual al 5%': 1, 'Entre el 5% y el 10%': 2, 'Mayores al 10%': 2}, 'decrease': {'Menores o igual al 5%': 4, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 6}}, '31': {'name': 'Vila de Gràcia', 'increase': {'Menores o igual al 5%': 7, 'Entre el 5% y el 10%': 5, 'Mayores al 10%': 8}, 'decrease': {'Menores o igual al 5%': 12, 'Entre el 5% y el 10%': 4, 'Mayores al 10%': 12}}, '28': {'name': 'Vallcarca i els Penitents', 'increase': {'Menores o igual al 5%': 1, 'Entre el 5% y el 10%': 0, 'Mayores al 10%': 0}, 'decrease': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 1}}, '29': {'name': 'El Coll', 'increase': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 1, 'Mayores al 10%': 0}, 'decrease': {'Menores o igual al 5%': 0, 'Entre el 5% y el 10%': 2, 'Mayores al 10%': 1}}, '30': {'name': 'La Salut', 'increase': {}, 'decrease': {'Menores o igual al 5%': 2, 'Entre el 5% y el 10%': 0, 'Mayores al 10%': 2}}}
+
+
  
 var isMobile = window.innerWidth <= 1200;
 var optionsPrecio = {
@@ -87,7 +90,7 @@ var optionsM2 = {
         enabled: true,
         offsetY: isMobile ? 30 : 0,
         style: {
-            fontSize: isMobile ? '0px' : '12px',
+            fontSize: isMobile ? '12px' : '12px',
             colors: isMobile ? ['#000'] : ['#fff'], // Cambia el color de las etiquetas de datos a negro
         }
     },
@@ -124,14 +127,6 @@ var optionsM2 = {
 var chartM2 = new ApexCharts(document.querySelector("#histM2"), optionsM2);
 chartM2.render();
 
-function roundToNext500k(value) {
-    return Math.ceil(value / 500000) * 500000;
-}
-
-function roundToNext100k(value) {
-    return Math.ceil(value / 100) * 100;
-}
-
  // Combinando 'Precio Promedio por Barrio' y 'Distribución de Pisos por Barrio' en un solo gráfico
  var optionsCombinedBarrio = {
     chart: {
@@ -152,45 +147,24 @@ function roundToNext100k(value) {
     xaxis: {
         categories: alquilados_keys_barrio_dist
     },
-    yaxis: [
-        {
-            seriesName: 'Precio Promedio',  // Asociar este eje y con la serie 'Añadidos'
-            title: {
-                text: 'Precio Promedio'
-            },
-            min: 0,
-            max: roundToNext500k(Math.max(...alquilados_values_barrio, ...alquilados_values_barrio)) + 500000
-        },
-        {
-            opposite: true,
-            seriesName: 'Número de Pisos',  // Asociar este eje y con la serie 'Pisos Ofertados'
-            title: {
-                text: 'Número de pisos'
-            },
-            min: 0,
-            max: roundToNext100k(Math.max(...alquilados_values_barrio_dist)) + 0
-        }
-    ],
     dataLabels: {
-        enabled: isMobile ? false : true,
-        
+        enabled: true,
         offsetY: isMobile ? 30 : 0,
-        formatter: function (value, { seriesIndex, dataPointIndex, w }) {
-            // Asumiendo que la serie de 'Precio Promedio' es la que tiene los rectángulos azules
-            // y que queremos ocultar las etiquetas de datos para esa serie específica.
-            if (w.config.series[seriesIndex].name === 'Precio Promedio') {
-                return '';
+        formatter: function (value, { seriesIndex }) {
+            // Si es la serie "Precio Promedio" (índice 0), añade el símbolo de €
+            if (seriesIndex === 0) {
+                return value + '€';
             }
-            // Para cualquier otra serie, devuelve el valor con el símbolo de € si es necesario
-            return seriesIndex === 0 ? value + '€' : value;
+            // De lo contrario, muestra el valor sin modificaciones
+            return value;
         },
         style: {
             fontSize: '12px',
-            colors: isMobile ? ['#000'] : ['#fff']
+            colors: isMobile ? ['#000'] : ['#fff']  // Puedes ajustar el color y tamaño según tus necesidades
         }
     },
     title: {
-        text: 'Distribución por Distrito',
+        text: 'Distribución por Barrio',
         align: 'left'
     },
     plotOptions: {
@@ -259,7 +233,7 @@ var optionsPisosFecha = {
                 text: 'Añadidos y Retirados'
             },
             min: 0,
-            max: Math.max(Math.max(...values_entrada),Math.max(...values_salida)) + 100
+            max: Math.max(Math.max(...values_entrada),Math.max(...values_salida)) + 10
         },
         {
             seriesName: 'Añadidos',  // Asociar este eje y con la serie 'Añadidos'
@@ -272,7 +246,7 @@ var optionsPisosFecha = {
                 text: 'Número de Pisos Ofertados'
             },
             min: 0,
-            max: Math.max(...num_pisos_en_alquiler) + 2000
+            max: Math.max(...num_pisos_en_alquiler) + 50
         }
     ],
     xaxis: {
@@ -415,5 +389,5 @@ document.getElementById('toggleData').addEventListener('click', function() {
     updateGraphs();
 
     // Cambiar el texto del botón para reflejar el estado actual
-    document.getElementById('toggleData').innerText = (currentData === "alquilados") ? "Mostrar Pisos en Oferta" : "Mostrar Comprados";
+    document.getElementById('toggleData').innerText = (currentData === "alquilados") ? "Mostrar Pendientes" : "Mostrar Alquilados";
 });
